@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./node_modules/imagehover.css/css/imagehover.min.css">
+    <style>
+    
+    body{
+        height: 3000px;
+    }
+
+
+    .img-show{
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        transform:  translateX(250px) rotate(-10deg);
+        transition: transform 0.6s;
+    }
+
+    .show{
+        transform :translateX(0px)
+    }
+
+    .stack-img{
+        width: 200px;
+        height: 300px;
+        object-fit: cover;
+        transform: rotate(10deg);
+        margin-left: -160px;
+        border: 5px solid rgb(255, 255, 255);
+        transition: 0.7s;
+    }
+
+    .stack-img:nth-child(1){
+        margin-left: 0;
+    }
+
+    .active{
+        transform: rotate(-20deg) translateY(-50px) translateX(-100px) scale(1.1);
+    }
+
+    </style>
+</head>
+
+
+<body >
+    
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-6 col-md-4 ">
+                <div class="card-column">
+                    <figure class="imghvr-reveal-left">
+                        <img src="./image-test/FB_IMG_1980459635229668626.jpg">
+                        <figcaption>
+                            <h3>Mg Zen</h3>
+                            <p class="small">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat rem inventore minima provident delectus amet consequatur quis sint! Quod, necessitatibus eum incidunt non soluta sunt aliquid blanditiis doloribus quia consequatur.
+                            </p>
+                        </figcaption>
+                    </figure>
+                    <figure class="imghvr-flip-diag-1">
+                        <img src="./image-test/25f75778912a88d6330902b6d07cf9a4.jpg">
+                        <figcaption>
+                            <h3>Mg Zen</h3>
+                            <p class="small">
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat rem inventore minima provident delectus amet consequatur quis sint! Quod, necessitatibus eum incidunt non soluta sunt aliquid blanditiis doloribus quia consequatur.
+                            </p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="col-12 mb-4">
+                <button class="btn btn-primary" id="show">
+                    Show
+                </button>
+                <button class="btn btn-primary" id="hide">
+                    Hide
+                </button>
+                <button class="btn btn-primary" id="toggle">
+                    Toggle
+                </button>
+            </div>
+
+            <div class="col-12">
+                <div class="my-5">
+                    <img class="stack-img" src="./image-test/25f75778912a88d6330902b6d07cf9a4.jpg" alt="">
+                    <img class="stack-img" src="./image-test/day_1514.png" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_156593138434570278.jpg" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_1884887036757725372.jpg" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_1884887036757725372.jpg" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_1884887036757725372.jpg" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_1884887036757725372.jpg" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_1884887036757725372.jpg" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_1980459635229668626.jpg" alt="">
+                    <img class="stack-img" src="./image-test/FB_IMG_2578964164897313451.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-12 mb-4">
+                <button class="btn btn-primary" id="start">
+                    start
+                </button>
+                <button class="btn btn-primary" id="stop">
+                    stop
+                </button>
+                <button class="btn btn-primary" id="auto">
+                    auto
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+    <img src="./image-test/FB_IMG_2109097352083250076.jpg" class="img-show" width="300" alt="">
+
+    <script>
+
+
+        let showImg = document.querySelector(".img-show");
+        let showBtn = document.getElementById("show");
+        let hideBtn = document.getElementById("hide");
+        let toggleBtn = document.getElementById("toggle");
+
+        showBtn.addEventListener('click',function(){
+            showImg.style.transform ="translateX(0px)";
+        });
+        hideBtn.addEventListener('click',function(){
+            showImg.style.transform =" translateX(250px) rotate(-10deg)";
+        });
+
+        toggleBtn.addEventListener('click',function(){
+            showImg.classList.toggle("show");
+        })
+
+
+        //stack-img
+
+        let allStackImages = document.querySelectorAll(".stack-img");
+        let currentStack = 0;
+
+        function run (){
+            // console.log("work"+ currentStack)
+                if(currentStack > 0){
+                    allStackImages[currentStack-1].classList.remove('active');
+                }else{
+                    allStackImages[allStackImages.length-1].classList.remove('active');
+                }
+
+                allStackImages[currentStack].classList.add('active');
+                if(currentStack === allStackImages.length-1){
+                    currentStack = 0;
+                }else{
+                    currentStack++;
+                }
+        }
+
+        let runner = setInterval(run,1000);
+
+        // let runner;
+
+        // function start(){
+        //     runner= setInterval(run,1000);
+        // }
+
+        // function stop(){
+        //     clearInterval(runner);
+        // }
+
+    </script>
+
+</body>
+</html>
